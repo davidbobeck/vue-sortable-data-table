@@ -1,7 +1,8 @@
 <script setup>
-import SearchForm from "./SearchForm.vue";
-import FilterRadios from "./FilterRadios.vue";
-import FilterDropdown from "./FilterDropdown.vue";
+import SearchForm from "../DataTable/SearchForm.vue";
+import FilterRadios from "../DataTable/FilterRadios.vue";
+import FilterDropdown from "../DataTable/FilterDropdown.vue";
+import SortableHeader from "../DataTable/SortableHeader.vue";
 import { computed, ref } from "vue";
 
 const searchSetting = ref("");
@@ -96,33 +97,39 @@ const statusFilter = (filter) => {
   console.log(statusSetting.value);
 };
 
-const sortById = () => {
-  console.log("sortById")
-  sortColumn.value = "id";
-  sortDescending.value = !sortDescending.value;
-};
+// const sortById = () => {
+//   console.log("sortById")
+//   sortColumn.value = "id";
+//   sortDescending.value = !sortDescending.value;
+// };
 
-const sortByName = () => {
-  console.log("sortByName")
-  sortColumn.value = "name";
-  sortDescending.value = !sortDescending.value;
-};
+// const sortByName = () => {
+//   console.log("sortByName")
+//   sortColumn.value = "name";
+//   sortDescending.value = !sortDescending.value;
+// };
 
-const sortByStatus = () => {
-  console.log("sortByStatus")
-  sortColumn.value = "status";
-  sortDescending.value = !sortDescending.value;
-};
+// const sortByStatus = () => {
+//   console.log("sortByStatus")
+//   sortColumn.value = "status";
+//   sortDescending.value = !sortDescending.value;
+// };
 
-const sortByTitle = () => {
-  console.log("sortByTitle")
-  sortColumn.value = "title";
-  sortDescending.value = !sortDescending.value;
-};
+// const sortByTitle = () => {
+//   console.log("sortByTitle")
+//   sortColumn.value = "title";
+//   sortDescending.value = !sortDescending.value;
+// };
 
-const sortByDueAt = () => {
-  console.log("sortByDueAt")
-  sortColumn.value = "due_at";
+// const sortByDueAt = () => {
+//   console.log("sortByDueAt")
+//   sortColumn.value = "due_at";
+//   sortDescending.value = !sortDescending.value;
+// };
+
+const sortByColumn = (column) => {
+  console.log(`DataTable: sortByColumn ${column}`)
+  sortColumn.value = column;
   sortDescending.value = !sortDescending.value;
 };
 
@@ -147,7 +154,17 @@ const sortByDueAt = () => {
     <table class="w-full text-sm text-center text-gray-400">
       <thead class="text-xs text-gray-700 uppercase bg-blue-100 cursor-pointer">
         <tr>
-          <th class="px-4 py-3" @click="sortById">
+          <SortableHeader column="id" :sortColumn="sortColumn" :sortDescending="sortDescending"
+            @sortByColumn="sortByColumn">ID</SortableHeader>
+          <SortableHeader column="name" :sortColumn="sortColumn" :sortDescending="sortDescending"
+            @sortByColumn="sortByColumn">Name</SortableHeader>
+          <SortableHeader column="status" :sortColumn="sortColumn" :sortDescending="sortDescending"
+            @sortByColumn="sortByColumn">Status</SortableHeader>
+          <SortableHeader column="title" :sortColumn="sortColumn" :sortDescending="sortDescending"
+            @sortByColumn="sortByColumn">Title</SortableHeader>
+          <SortableHeader column="due_at" :sortColumn="sortColumn" :sortDescending="sortDescending"
+            @sortByColumn="sortByColumn">Due At</SortableHeader>
+          <!-- <th class="px-4 py-3" @click="sortById">
             ID
             <span v-if="sortColumn == 'id' && !sortDescending">
               <i class="fa fa-fw fa-solid fa-sort-up"></i>
@@ -155,8 +172,8 @@ const sortByDueAt = () => {
             <span v-if="sortColumn == 'id' && sortDescending">
               <i class="fa fa-fw fa-solid fa-sort-down"></i>
             </span>
-          </th>
-          <th class="px-4 py-3" @click="sortByName">
+          </th> -->
+          <!-- <th class="px-4 py-3" @click="sortByName">
             Name
             <span v-if="sortColumn == 'name' && !sortDescending">
               <i class="fa fa-fw fa-solid fa-sort-up"></i>
@@ -164,8 +181,8 @@ const sortByDueAt = () => {
             <span v-if="sortColumn == 'name' && sortDescending">
               <i class="fa fa-fw fa-solid fa-sort-down"></i>
             </span>
-          </th>
-          <th class="px-4 py-3" @click="sortByStatus">
+          </th> -->
+          <!-- <th class="px-4 py-3" @click="sortByStatus">
             Status
             <span v-if="sortColumn == 'status' && !sortDescending">
               <i class="fa fa-fw fa-solid fa-sort-up"></i>
@@ -191,7 +208,7 @@ const sortByDueAt = () => {
             <span v-if="sortColumn == 'due_at' && sortDescending">
               <i class="fa fa-fw fa-solid fa-sort-down"></i>
             </span>
-          </th>
+          </th> -->
           <th class="px-4 py-3">
             <span class="sr-only">Actions</span>
           </th>

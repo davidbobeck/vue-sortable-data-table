@@ -1,6 +1,6 @@
 <script setup>
 import { onMounted, ref } from "vue";
-import DataTable from "./components/DataTable.vue";
+import DataTable from "./components/DataTable/DataTable.vue";
 
 const items = ref([]);
 
